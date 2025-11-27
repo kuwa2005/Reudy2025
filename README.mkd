@@ -42,12 +42,67 @@ docker exec -it reudy ruby stdio_reudy.rb
 ### ローカルで実行する場合
 
 #### IRCボットとして使う場合
-publicフォルダにあるsetting.ymlを編集してから  
+
+`public/setting.yml`を編集してIRC接続情報を設定してください：
+
+```yaml
+# IRCサーバー接続設定
+:host: irc.ircnet.ne.jp        # IRCサーバーのホスト名
+:port: 6668                    # ポート番号（通常は6667または6668）
+:encoding: UTF-8               # 文字コード（UTF-8推奨）
+:channel: "#reudy_test"        # 参加するチャンネル
+:info_channel: "#reudy_test"   # 情報出力用チャンネル
+
+# ボットの設定
+:nick: ReudyTest               # ボットのニックネーム
+:nicks:                        # ボットが反応するニックネームのリスト
+  - Reudy
+  - reudy
+  - ロイディ
+
+# 接続時のメッセージ
+:joining_message: こんにちは。  # チャンネル参加時の挨拶
+:leaving_message: さようなら。  # 退出時のメッセージ
+
+# パスワードが必要な場合
+:login_password:               # サーバー認証パスワード（不要な場合は空）
+:channel_key:                  # チャンネルキー（不要な場合は空）
+
+# 動作モード（0:沈黙, 1:寡黙, 2:通常, 3:饒舌, 4:必ず応答）
+:default_mode: 2
+
+# 自動再接続
+:auto_reconnect: true
+```
+
+設定後、以下のコマンドでIRCクライアントが立ち上がります：
+
 ```bash
 ruby irc_reudy.rb
 ```
 
-でIRCクライアントが立ち上がります。
+**Dockerを使用する場合：**
+
+```bash
+# コンテナを起動
+docker-compose up -d
+
+# IRCボットを実行
+docker exec -it reudy ruby irc_reudy.rb
+```
+
+**コマンドラインオプション：**
+
+```bash
+# 設定ディレクトリを指定
+ruby irc_reudy.rb -d /path/to/public
+
+# DBMタイプを指定（デフォルト: pstore）
+ruby irc_reudy.rb --db pstore
+
+# MeCabを使用しない（デフォルトではMeCabを使用）
+ruby irc_reudy.rb --no-mecab
+```
 　
 ### Mastodonボットとして使う場合（推奨）
 Twitter APIの代替として、Mastodon APIに対応しています。

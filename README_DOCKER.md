@@ -32,10 +32,33 @@ docker build -t reudy2025 .
 #### IRCボットとして使用する場合
 
 ```yaml
-:host: irc.ircnet.ne.jp
-:port: 6668
-:channel: "#reudy_test"
-:encoding: UTF-8
+# IRCサーバー接続設定
+:host: irc.ircnet.ne.jp        # IRCサーバーのホスト名
+:port: 6668                    # ポート番号（通常は6667または6668）
+:encoding: UTF-8               # 文字コード（UTF-8推奨）
+:channel: "#reudy_test"        # 参加するチャンネル
+:info_channel: "#reudy_test"   # 情報出力用チャンネル
+
+# ボットの設定
+:nick: ReudyTest               # ボットのニックネーム
+:nicks:                        # ボットが反応するニックネームのリスト
+  - Reudy
+  - reudy
+  - ロイディ
+
+# 接続時のメッセージ
+:joining_message: こんにちは。  # チャンネル参加時の挨拶
+:leaving_message: さようなら。  # 退出時のメッセージ
+
+# パスワードが必要な場合
+:login_password:               # サーバー認証パスワード（不要な場合は空）
+:channel_key:                  # チャンネルキー（不要な場合は空）
+
+# 動作モード（0:沈黙, 1:寡黙, 2:通常, 3:饒舌, 4:必ず応答）
+:default_mode: 2
+
+# 自動再接続
+:auto_reconnect: true
 ```
 
 #### Mastodonボットとして使用する場合
