@@ -3,7 +3,7 @@
 #Modified by Glass_saga <glass.saga@gmail.com>
 
 require 'socket'
-require 'thread'
+# Thread is part of standard library in Ruby 3.x, no need to require
 require $REUDY_DIR + '/irc-client'
 require $REUDY_DIR + '/reudy_common'
 

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  reudy:
+    build: .
+    container_name: reudy
+    volumes:
+      - ./public:/app/public
+      - ./data:/app/data
+    environment:
+      - REUDY_DIR=/app/lib/reudy
+      - OUT_KCODE=UTF-8
+    stdin_open: true
+    tty: true
+    # Keep container running (override with command when executing)
+    command: ["sleep", "infinity"]
+    # Uncomment and configure for IRC
+    # command: ["ruby", "irc_reudy.rb"]
+    # Uncomment for Lingr
+    # command: ["ruby", "lingr_reudy.rb"]
+    # ports:
+    #   - "4567:4567"
+

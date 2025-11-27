@@ -67,7 +67,7 @@ module Gimite
       @recentUnusedCt = 100 #最近n個の発言は対象としない
       @repeatProofCt = 50 #過去n発言で使ったベース発言は再利用しない
       @recentBaseMsgNs = Array.new(@repeatProofCt) #最近使ったベース発言番号
-      @thoughtFile = open(dir + "/thought.txt", "a") #思考過程を記録するファイル
+      @thoughtFile = File.open(dir + "/thought.txt", "a") #思考過程を記録するファイル
       @thoughtFile.sync = true
       
       setWordAdoptBorder
@@ -76,7 +76,7 @@ module Gimite
     #設定をファイルからロード
     def loadSettings
       File.open(@settingPath) do |file|
-        @settings = YAML.load(file)
+        @settings = YAML.unsafe_load(file)
       end
       @settings.merge!(@fixedSettings)
       #メンバ変数を更新

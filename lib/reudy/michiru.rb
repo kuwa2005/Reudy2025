@@ -34,13 +34,13 @@ class Michiru
   
   #設定をファイルからロード
   def loadSettings
-    file = Kernel.open(@settingPath)
-    @settings = Hash.new
-    file.each_line do |line|
-      ss = line.chop.split(/\t/, 2)
-      @settings[ss[0]] = ss[1]
+    File.open(@settingPath) do |file|
+      @settings = Hash.new
+      file.each_line do |line|
+        ss = line.chop.split(/\t/, 2)
+        @settings[ss[0]] = ss[1]
+      end
     end
-    file.close
     @fixedSettings.each do |key, val|
       @settings[key] = val
     end

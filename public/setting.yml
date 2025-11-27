@@ -43,3 +43,6 @@
 :twitter:
   :key: "consumer key"
   :secret: "consumer secret"
+:mastodon:
+  :instance_url: "https://mastodon.example.com"
+  :access_token: "your_access_token_here"

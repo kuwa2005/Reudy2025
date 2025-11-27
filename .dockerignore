@@ -1,0 +1,12 @@
+.git
+.gitignore
+*.md
+manual/
+LICENCE.txt
+data/
+*.log
+thought.txt
+token
+*.db
+*.pstore
+

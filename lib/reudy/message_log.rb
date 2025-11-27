@@ -24,7 +24,10 @@ module Gimite
       @innerFileName = inner_filename
       @observers = []
       File.open(inner_filename) do |f|
-        @size = f.lines("\n---").count
+        content = f.read
+        # YAMLファイルは---で区切られているので、---で分割
+        parts = content.split(/^---$/).reject(&:empty?)
+        @size = parts.count
       end
     end
   
@@ -38,10 +41,13 @@ module Gimite
     #n番目の発言
     def [](n)
       n += @size if n < 0 #末尾からのインデックス
+      return nil if n < 0 || n >= @size
       File.open(@innerFileName) do |f|
-        line = f.lines("\n---").find{ f.lineno > n }
-        if line && line != "\n---"
-          m = YAML.load(line)
+        content = f.read
+        parts = content.split(/^---$/).reject(&:empty?)
+        line = parts[n]
+        if line && !line.strip.empty?
+          m = YAML.unsafe_load("---\n#{line}")
           return Message.new(m[:fromNick], m[:body])
         else
           return nil
@@ -62,11 +68,13 @@ module Gimite
     
     #内部データをクリア(デフォルトのログのみ残す)
     def clear
-      File.open(@innerFileName, "w") do |f|
-        default = f.lines("\n---").select{|s| YAML.load(s)[:fromNick] == "Default" }
+      File.open(@innerFileName, "r+") do |f|
+        content = f.read
+        parts = content.split(/^---$/).reject(&:empty?)
+        default = parts.select{|s| !s.strip.empty? && YAML.unsafe_load("---\n#{s}")[:fromNick] == "Default" }
         f.rewind
-        f.puts default.join
-        f.truncate(f.size)
+        f.truncate(0)
+        default.each_with_index { |line, idx| f.write("#{idx > 0 ? "---\n" : ""}#{line}") }
         @size = default.size
       end
     end

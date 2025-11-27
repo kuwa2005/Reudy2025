@@ -1,0 +1,39 @@
+# イメージをビルド
+docker-compose build
+
+# コンテナを起動
+docker-compose up -d
+
+# IRCボットとして実行
+docker exec -it reudy ruby irc_reudy.rb
+
+# Mastodonボットとして実行
+docker exec -it reudy ruby mastodon_reudy.rb
+
+# 対話型で実行
+docker exec -it reudy ruby stdio_reudy.rb
+
+Mastodon設定
+public/setting.ymlに以下を設定：
+
+:mastodon:
+  :instance_url: "https://mastodon.example.com"
+  :access_token: "your_access_token_here"
+
+# コンテナを停止・削除
+docker-compose down
+
+# 再ビルド
+docker-compose build
+
+# 起動
+docker-compose up -d
+
+# 実行（IRCボットの場合）
+docker exec -it reudy ruby irc_reudy.rb
+
+# または Mastodonボット
+docker exec -it reudy ruby mastodon_reudy.rb
+
+# または 対話型
+docker exec -it reudy ruby stdio_reudy.rb
