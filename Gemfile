@@ -15,6 +15,6 @@ gem "json", "~> 2.7", group: :lingr
 # gem "mastodon-api", "~> 0.1", group: :mastodon
 # gem "bluesky", "~> 0.1", group: :bluesky
 
-# MeCab support (optional)
-# gem "natto", "~> 1.2", group: :mecab
+# MeCab support (default)
+gem "mecab", "~> 0.996"
 

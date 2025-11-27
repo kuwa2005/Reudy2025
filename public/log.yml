@@ -31,3 +31,63 @@
 ---
 :fromNick: "!"
 :body: おはよう。
+---
+:fromNick: test
+:body: はろう？
+---
+:fromNick: "!"
+:body: はろう？
+---
+:fromNick: test
+:body: こんいちは
+---
+:fromNick: "!"
+:body: 何？
+---
+:fromNick: test
+:body: 起きてる？
+---
+:fromNick: "!"
+:body: 何？
+---
+:fromNick: test
+:body: はろう！
+---
+:fromNick: "!"
+:body: 起きてる？
+---
+:fromNick: test
+:body: なんですと？！
+---
+:fromNick: "!"
+:body: こんにちは。
+---
+:fromNick: test
+:body: こんにちは
+---
+:fromNick: "!"
+:body: おはよう。
+---
+:fromNick: test
+:body: 今は昼だよ
+---
+:fromNick: "!"
+:body: なんでやねん。
+---
+:fromNick: test
+:body: そうきたか
+---
+:fromNick: "!"
+:body: hello
+---
+:fromNick: test
+:body: はろー！
+---
+:fromNick: "!"
+:body: こんいちは
+---
+:fromNick: test
+:body: まちがってるし
+---
+:fromNick: "!"
+:body: なんですと？！

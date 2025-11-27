@@ -20,8 +20,8 @@ module Gimite
   db = 'pstore'
   opt.on('--db DB_TYPE') { |v| db = v }
   
-  mecab = nil
-  opt.on('-m','--mecab') { |v| mecab = true }
+  mecab = true  # デフォルトでMeCabを使用
+  opt.on('--no-mecab') { |v| mecab = nil }
   
   opt.parse!(ARGV)
   directory = ARGV.first unless ARGV.empty?

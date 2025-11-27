@@ -70,9 +70,9 @@ opt.on('-n nickname') do |v|
   nick = v
 end
 
-mecab = nil
-opt.on('-m','--mecab') do |v|
-  mecab = true
+mecab = true  # デフォルトでMeCabを使用
+opt.on('--no-mecab') do |v|
+  mecab = nil
 end
 
 opt.parse!(ARGV)

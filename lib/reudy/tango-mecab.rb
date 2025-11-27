@@ -1,7 +1,7 @@
 #encoding:utf-8
 #Copyright (C) 2011 Glass_saga <glass.saga@gmail.com>
 
-require 'MeCab'
+require 'mecab'
 
 class WordExtractor
   # WordExtractor(単語候補リストを保持する長さ,単語追加時のコールバック)

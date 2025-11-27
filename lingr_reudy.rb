@@ -19,7 +19,8 @@ end
 
 include Gimite
 
-reudy = Reudy.new("public")
+# デフォルトでMeCabを使用
+reudy = Reudy.new("public", {}, "pstore", true)
 lingr = Lingr.new
 reudy.client = lingr
 
