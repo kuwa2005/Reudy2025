@@ -8,6 +8,7 @@
 
 - **Dockerコンテナ化**: `docker exec`で実行可能
 - **Ruby 3.4対応**: 最新のRubyで動作
+- **MeCabデフォルト使用**: 形態素解析による高精度な単語抽出（`--no-mecab`で無効化可能）
 - **Twitter代替**: Mastodon API対応を追加
 
 ## セットアップ
@@ -82,12 +83,18 @@ docker exec -it reudy ruby stdio_reudy.rb
 
 - `-d DIRECTORY`: 設定ディレクトリを指定（デフォルト: `public`）
 - `--db DB_TYPE`: 使用するDBMタイプを指定（デフォルト: `pstore`）
-- `-m, --mecab`: MeCabを使用して単語抽出（MeCabがインストールされている場合）
+- `--no-mecab`: MeCabを使用しない（デフォルトではMeCabを使用）
+
+**注意**: デフォルトでMeCabによる形態素解析を使用します。正規表現ベースの単語抽出を使用したい場合は`--no-mecab`オプションを指定してください。
 
 例:
 
 ```bash
+# MeCabを使用（デフォルト）
 docker exec -it reudy ruby stdio_reudy.rb -d /app/public --db pstore
+
+# MeCabを使用しない
+docker exec -it reudy ruby stdio_reudy.rb --no-mecab
 ```
 
 ## データの永続化
@@ -99,7 +106,16 @@ docker exec -it reudy ruby stdio_reudy.rb -d /app/public --db pstore
 ### Ruby 3.4での互換性
 
 - `require 'thread'`を削除（標準ライブラリに統合済み）
-- Psych 5.0を使用（YAML処理）
+- `File.exists?` → `File.exist?`に変更
+- `File#lines` → `split`に変更（Ruby 3.4で削除されたメソッド）
+- `Kernel.open` → `File.open`に変更
+- `YAML.load` → `YAML.unsafe_load`に変更（Psych 5.0対応）
+
+### MeCab
+
+- DockerコンテナにはMeCab 0.996とmecab-ipadic-utf8辞書が組み込まれています
+- MeCabの初期化に時間がかかる場合があります
+- `--no-mecab`オプションでMeCabを無効化できます
 
 ### Mastodon API
 
